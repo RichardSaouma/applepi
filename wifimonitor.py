@@ -45,6 +45,9 @@ PROBE_REQUEST_SUBTYPE = 4
 # Set non-statically in the future.
 iface = 'wlan0'
 channel = 1
+os.system('sudo ifconfig wlan0 down ')
+os.system('sudo iwconfig wlan0 mode monitor ')
+os.system('sudo ifconfig wlan0 up ')
 
 seen_mac_addresses = set()
 seen_SSIDs = set()
