@@ -1,0 +1,1 @@
+﻿echo 148F 5370 > /sys/bus/usb/drivers/rt2800usb/new_id

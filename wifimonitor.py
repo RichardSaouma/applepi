@@ -10,7 +10,7 @@ from scapy.all import *
 from multiprocessing import Process
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from database import Base, Packet
+from database import Base, Packet, createNewDatabase
 
 
 # Database setup.
@@ -18,17 +18,21 @@ from database import Base, Packet
 TimeFileStamp=datetime.datetime.now()
 date_str = TimeFileStamp.strftime("%Y-%m-%d_%H-%M-%S")
 name=str("sniff-"+date_str+".db")
-
-def create():
-    try:
-        file=open(name, 'a')   # Trying to create a new file or open one
-        file.close()
-    except:
-        print('Something went wrong! Can\'t tell what?')
-        sys.exit(0) # quit Python
-create()
-name2=str("sqlite:///"+name)
-engine = create_engine(name2)
+#
+#def create():
+#    try:
+#        file=open(name, 'a')   # Trying to create a new file or open one
+#        file.close()
+#    except:
+#        print('Something went wrong! Can\'t tell what?')
+#        sys.exit(0) # quit Python
+#create()
+#name2=str("sqlite:///"+name)
+#print(name2)
+##createNewDatabase(name)
+#engine = create_engine(name2)
+engine = create_engine('sqlite:///%s.db' % name, convert_unicode=True)
+Base.metadata.create_all(engine)
 engine.raw_connection().connection.text_factory = str
 Base.metadata.bind = engine
 
@@ -79,7 +83,7 @@ def hop_channels():
 	channel = 0
 	while True:
 		try:
-			channel = (channel % 14 + 1)
+			channel = (channel % 11 + 1)
 			os.system('iw dev %s set channel %d' % (iface, channel))
 			print 'setting channel to %d' % (channel)
 			time.sleep(5)
