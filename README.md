@@ -18,3 +18,7 @@ The frontend is a server that is powered using Flask, rendering Jinja2 templates
 # When running on Raspbian
 
 You need to sudo service ifplugd stop before you sudo ifconfig wlan0 down; sudo iwconfig wlan0 mode monitor; sudo ifconfig wlan0 up.
+
+http://blog.cvallance.net/?p=212
+https://sandilands.info/sgordon/capturing-wifi-in-monitor-mode-with-iw
+http://pastebin.com/3b0XQrud  <-- All about the echo
